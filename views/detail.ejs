@@ -1,0 +1,55 @@
+<div class="container mt-2">
+    <div class="row">
+        <% if (!contact) { %>
+            <div class="col mt-5">
+                <h1 class="text-center">Contact Not Found!</h1>
+            </div>
+            <% } else { %>
+                <div class="col-md-8">
+                    <h2>Detail Contact</h2>
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <%= contact.nama %>
+                            </h5>
+                            <h6 class="card-subtitle mb-2 text-body-secondary">
+                                <%= contact.nohp %>
+                            </h6>
+                            <p class="card-text">
+                                <%= contact.email %>
+                            </p>
+                            <a href="/contact/edit/<%= contact.nama %>" class="btn btn-primary badge ml-2">Edit
+                            </a>
+                            <button type="button" class="btn btn-danger badge ml-2" data-bs-toggle="modal"
+                                data-bs-target="#hapus<%= contact.nama %>">
+                                Hapus
+                            </button>
+                            <a href="/contact" class="card-link d-block mt-3">&laquo;Kembali</a>
+                        </div>
+                    </div>
+                    <% } %>
+                </div>
+    </div>
+</div>
+
+<div class="modal fade" id="hapus<%= contact.nama %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">KONFIRMASI</h5>
+            </div>
+            <div class="modal-body">
+                Kamu Akan Menghapus Contact dengan Nama
+                <%= contact.nama %>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                <form action="/contact?_method=DELETE" method="post" class="d-inline">
+                    <input type="hidden" name="nama" id="nama" value="<%= contact.nama %>">
+                    <button type="submit" class="btn btn-danger">Hapus</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
